@@ -30,7 +30,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo apt-get -y update
+            sudo apt-get update -y
             sudo apt install npm -y
             curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
             echo installing node
@@ -38,18 +38,19 @@ jobs:
             echo installing nginx
             sudo apt install nginx -y
             cd /var/www/html
-            sudo git clone https://github.com/Aarthimaha03/typescript-.git
+            sudo git clone https://github.com/Hemnath0/Snake-And-Ladder-Game.git
             cd /etc/nginx/conf.d
             sudo touch react.conf
             sudo chmod 666 /etc/nginx/conf.d/react.conf
             sudo echo 'server {
-                listen 80;
-                listen [::]:80;
-                root /var/www/html/typescript-/build;
-            #react app
-            location / { 
-            try_files $uri /index.html;
-            }
-            }' >> react.conf
-            sudo sed -i '60s/^/#/' /etc/nginx/nginx.conf
-            sudo nginx -t && sudo systemctl reload nginx
+              listen 80;
+              listen [::]:80;
+              root /var/www/html/Snake-And-Ladder-Game/Build;
+
+              #react app
+              location / { 
+                try_files $uri /index.html;
+                }
+              }' >> react.conf
+              sudo sed -i '60s/^/#/' /etc/nginx/nginx.conf
+              sudo nginx -t && sudo systemctl reload nginx
